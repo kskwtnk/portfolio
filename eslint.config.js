@@ -1,16 +1,22 @@
+import js from "@eslint/js";
+import prettier from "eslint-config-prettier";
+import astro from "eslint-plugin-astro";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import eslintPluginAstro from 'eslint-plugin-astro';
-import eslintConfigPrettier from "eslint-config-prettier";
+import ts from "typescript-eslint";
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  { files: ["**/*.{js,mjs,cjs,ts}"] },
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  ...eslintPluginAstro.configs.recommended,
-  ...eslintPluginAstro.configs["jsx-a11y-recommended"],
-  eslintConfigPrettier,
-];
+export default defineConfig([
+  {
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+  },
+  {
+    plugins: { js, ts },
+    extends: ["js/recommended", "ts/recommended"],
+  },
+  {
+    files: ["**/*.astro"],
+    plugins: { astro },
+    extends: ["astro/recommended", "astro/jsx-a11y-recommended"],
+  },
+  prettier,
+]);
