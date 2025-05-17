@@ -17,6 +17,11 @@ export default defineConfig([
     files: ["**/*.astro"],
     plugins: { astro },
     extends: ["astro/recommended", "astro/jsx-a11y-recommended"],
+    languageOptions: {
+      parserOptions: {
+        parser: "typescript-eslint-parser-for-extra-files",
+      },
+    },
   },
   prettier,
 ]);
