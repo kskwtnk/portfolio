@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "@fontsource/shippori-mincho": "^5.2.5",
-    "@tailwindcss/vite": "^4.0.0",
+    "@tailwindcss/vite": "^4.1.7",
     "astro": "^5.2.2",
     "sharp": "^0.34.1",
-    "tailwindcss": "^4.0.0",
+    "tailwindcss": "^4.1.7",
     "three": "^0.176.0"
   },
   "devDependencies": {
