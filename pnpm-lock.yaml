@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@fontsource/shippori-mincho':
-        specifier: ^5.0.7
-        version: 5.1.0
+        specifier: ^5.2.5
+        version: 5.2.5
       '@tailwindcss/vite':
         specifier: ^4.0.0
         version: 4.0.0(vite@6.0.11(@types/node@20.12.14)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.6.1))
@@ -300,8 +300,8 @@ packages:
     resolution: {integrity: sha512-0J+zgWxHN+xXONWIyPWKFMgVuJoZuGiIFu8yxk7RJjxkzpGmyja5wRFqZIVtjDVOQpV+Rw0iOAjYPE2eQyjr0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@fontsource/shippori-mincho@5.1.0':
-    resolution: {integrity: sha512-j6XO0TQucwURapEKlwep3IpVaKj7CvB9iLu8fl0tm81yxiJqZ9mQ4duuqyQKUAK02NN6qZPMkVhTn3XBbH3SiA==}
+  '@fontsource/shippori-mincho@5.2.5':
+    resolution: {integrity: sha512-7UXvLZ5Ed77UnEXywSGRnobeiQbdX3I3vrGJzrH7K3Ni2SN34sIjTzkszQkBw2Pcmg+MoTGczJIfG4MwBc3c5A==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2992,7 +2992,7 @@ snapshots:
       '@eslint/core': 0.14.0
       levn: 0.4.1
 
-  '@fontsource/shippori-mincho@5.1.0': {}
+  '@fontsource/shippori-mincho@5.2.5': {}
 
   '@humanfs/core@0.19.1': {}
 
