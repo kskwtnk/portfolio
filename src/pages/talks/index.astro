@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+import Footer from "../../components/Footer.astro";
+import GlobalLayout from "../../layouts/GlobalLayout.astro";
+
+const allTalks = await getCollection("talks");
+---
+
+<GlobalLayout>
+  <div class="flex flex-col gap-16 px-3 pt-10 sm:px-5 md:px-7 md:pt-16">
+    <article
+      class="flex w-full max-w-[var(--container-3xl)] flex-col gap-y-6 self-center sm:gap-y-8"
+    >
+      <h1 class="text-3xl font-bold sm:text-5xl md:text-7xl">登壇実績</h1>
+      {
+        allTalks
+          .sort((a, b) => new Date(b.id).getTime() - new Date(a.id).getTime())
+          .map((talk) => (
+            <section class="flex flex-col gap-y-2 sm:gap-y-3">
+              <h2 class="text-xl font-bold sm:text-3xl md:text-4xl">
+                {`${talk.id}年`}
+              </h2>
+              <table class="border-t border-gray-300">
+                <thead>
+                  <tr class="border-b border-gray-300 text-left [&>th]:px-1.5 [&>th]:py-1">
+                    <th class="w-20">日時</th>
+                    <th>タイトル</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {talk.data.map((talk) => (
+                    <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
+                      <td class="proportional-nums">
+                        {talk.date.toLocaleDateString("ja-JP", {
+                          dateStyle: "medium",
+                        })}
+                      </td>
+                      <td>
+                        {talk.url ? (
+                          <a
+                            class="text-cyan-600 underline hover:text-cyan-900"
+                            href={talk.url}
+                          >
+                            {talk.id}
+                          </a>
+                        ) : (
+                          talk.id
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          ))
+      }
+    </article>
+    <Footer />
+  </div>
+</GlobalLayout>

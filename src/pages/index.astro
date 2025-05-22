@@ -8,6 +8,7 @@ import darkTheme from "../assets/20231006-dark_theme.jpg";
 import kininaruDevops from "../assets/20231120-kininaru_devops.jpg";
 
 const allWorks = await getCollection("works");
+const allTalks = await getCollection("talks");
 ---
 
 <GlobalLayout>
@@ -132,6 +133,46 @@ const allWorks = await getCollection("works");
             </a>
           ))
       }
+    </section>
+    <section class="col-start-3 col-end-4 flex flex-col gap-y-4" id="talks">
+      <h2 class="text-3xl font-bold">登壇</h2>
+      <table class="border-t border-gray-300">
+        <thead>
+          <tr
+            class="border-b border-gray-300 text-left [&>th]:px-1.5 [&>th]:py-1"
+          >
+            <th class="w-20">日時</th>
+            <th>タイトル</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            allTalks
+              .flatMap((talk) => talk.data)
+              .sort(
+                (a, b) =>
+                  new Date(b.date).getTime() - new Date(a.date).getTime(),
+              )
+              .slice(0, 5)
+              .map((talk) => (
+                <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
+                  <td class="proportional-nums">
+                    {new Date(talk.date).toLocaleDateString("ja-JP", {
+                      dateStyle: "medium",
+                    })}
+                  </td>
+                  <td>{talk.id}</td>
+                </tr>
+              ))
+          }
+        </tbody>
+      </table>
+      <a
+        href="/talks"
+        class="self-start text-cyan-600 underline hover:text-cyan-900"
+      >
+        直近のすべての登壇
+      </a>
     </section>
     <section
       id="blog"
