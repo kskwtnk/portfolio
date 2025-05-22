@@ -33,8 +33,20 @@ const worksCollection = defineCollection({
     }),
 });
 
+const talksCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.json", base: "./src/content/talks" }),
+  schema: z.array(
+    z.object({
+      id: z.string(),
+      url: z.string().url().optional(),
+      date: z.coerce.date(),
+    }),
+  ),
+});
+
 export const collections = {
   "about-me": aboutMeCollection,
   "about-portfolio": aboutPortfolioCollection,
   works: worksCollection,
+  talks: talksCollection,
 };
