@@ -8,7 +8,7 @@
 | - | - | - |
 |  |  |  |
 
-OR 
+OR
 
 > [!NOTE]
 > No screenshots attached as there is no change in appearance
