@@ -14,7 +14,7 @@
   "dependencies": {
     "@fontsource/shippori-mincho": "^5.2.5",
     "@tailwindcss/vite": "^4.1.7",
-    "astro": "^5.7.13",
+    "astro": "^5.12.8",
     "sharp": "^0.34.1",
     "tailwindcss": "^4.1.7",
     "three": "^0.177.0"
