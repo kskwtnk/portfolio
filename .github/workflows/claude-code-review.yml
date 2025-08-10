@@ -42,14 +42,14 @@ jobs:
 
           # Direct prompt for automated review (no @claude mention needed)
           direct_prompt: |
-            Please review this pull request and provide feedback on:
-            - Code quality and best practices
-            - Potential bugs or issues
-            - Performance considerations
-            - Security concerns
-            - Test coverage
+            このプルリクエストを日本語でレビューしてください。以下の点についてフィードバックをお願いします：
+            - コードの品質とベストプラクティス
+            - 潜在的なバグや問題点
+            - パフォーマンス面の考慮事項
+            - セキュリティに関する懸念
+            - テストカバレッジ
             
-            Be constructive and helpful in your feedback.
+            建設的で有用なフィードバックをお願いします。このポートフォリオサイトは日本語コンテンツで構成されているため、レビューコメントも日本語でお願いします。
 
           # Optional: Use sticky comments to make Claude reuse the same comment on subsequent pushes to the same PR
           # use_sticky_comment: true
