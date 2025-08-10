@@ -1,8 +1,11 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "eslint.validate": ["javascript", "astro", "typescript"],
+  "eslint.validate": ["javascript", "typescript", "astro"],
   "tailwindCSS.includeLanguages": {
     "astro": "html"
+  },
+  "debug.javascript.defaultRuntimeExecutable": {
+    "pwa-node": "/Users/keisukewatanuki/.local/share/mise/shims/node"
   }
 }
