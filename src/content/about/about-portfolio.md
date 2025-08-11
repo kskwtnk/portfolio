@@ -1,8 +1,8 @@
 ---
 title: "ポートフォリオについて"
-cover: "./cover.png"
-keywords:
+summaryKeywords:
   ["Astro", "Figma", "pnpm", "Tailwind CSS", "three.js", "TypeScript", "Vercel"]
+summaryHeading: "使用している技術"
 ---
 
 このポートフォリオそのものも制作物の1つと捉えています。作った経緯や使用している技術、今後の展望などを記載します。

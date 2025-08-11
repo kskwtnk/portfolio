@@ -2,23 +2,15 @@ import type { Loader } from "astro/loaders";
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
-const aboutMeCollection = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/about-me" }),
-  schema: z.object({
-    title: z.string(),
-    keywords: z.string().array(),
-  }),
-});
-
-const aboutPortfolioCollection = defineCollection({
-  loader: glob({
-    pattern: "**/[^_]*.md",
-    base: "./src/content/about-portfolio",
-  }),
-  schema: z.object({
-    title: z.string(),
-    keywords: z.string().array(),
-  }),
+const aboutCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/about" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      summaryKeywords: z.string().array(),
+      summaryImage: image().optional(),
+      summaryHeading: z.string().optional(),
+    }),
 });
 
 const worksCollection = defineCollection({
@@ -139,8 +131,7 @@ const qiitaArticlesCollection = defineCollection({
 });
 
 export const collections = {
-  "about-me": aboutMeCollection,
-  "about-portfolio": aboutPortfolioCollection,
+  about: aboutCollection,
   works: worksCollection,
   talks: talksCollection,
   "qiita-articles": qiitaArticlesCollection,
