@@ -69,6 +69,16 @@ This is an Astro-based portfolio website for Keisuke Watanuki with Japanese cont
 - **Internal Thinking**: Think and process internally in English for efficiency
 - **Content Language**: All website content is in Japanese - maintain language consistency when editing content
 
+## MCP Integration
+
+This project includes MCP (Model Context Protocol) server configurations in `.mcp.json`:
+
+- **Astro docs**: Access to up-to-date Astro framework documentation
+- **context7**: Retrieve documentation and code examples for any library
+- **playwright**: Browser automation capabilities for testing and debugging
+
+These tools enhance Claude Code's ability to provide accurate, current information and testing capabilities.
+
 ## Important Notes
 
 - The site uses semantic HTML with proper accessibility considerations
