@@ -30,7 +30,9 @@ This is an Astro-based portfolio website for Keisuke Watanuki with Japanese cont
   - `works` - Portfolio projects with cover images, dates, and keywords
   - `talks` - Speaking engagements stored as JSON files by year
   - `about-me` and `about-portfolio` - Static content pages
+  - `qiita-articles` - Dynamic articles fetched from Qiita API using custom loader
 - **Content Structure**: All content files are in `src/content/` with markdown for rich content and JSON for structured data
+- **External API Integration**: Qiita API integration using custom loaders for dynamic content fetching at build time
 
 ### Styling & UI
 
@@ -50,6 +52,7 @@ This is an Astro-based portfolio website for Keisuke Watanuki with Japanese cont
 - **3D Background**: `granyGradients.ts` creates animated gradient effects using Three.js with custom shaders
 - **Intersection Observer**: Used for scroll-based UI animations (scroll guide visibility)
 - **Image Optimization**: Uses Astro's built-in Image component with Sharp
+- **Custom Content Loaders**: Qiita API integration with error handling, timeout controls, and graceful fallbacks for external content fetching
 
 ### File Organization
 
