@@ -4,11 +4,10 @@ import { getCollection } from "astro:content";
 import GlobalLayout from "../layouts/GlobalLayout.astro";
 import Footer from "../components/Footer.astro";
 import GrainyGradients from "../components/GrainyGradients.astro";
-import darkTheme from "../assets/20231006-dark_theme.jpg";
-import kininaruDevops from "../assets/20231120-kininaru_devops.jpg";
 
 const allWorks = await getCollection("works");
 const allTalks = await getCollection("talks");
+const qiitaArticles = await getCollection("qiita-articles");
 ---
 
 <GlobalLayout>
@@ -174,26 +173,59 @@ const allTalks = await getCollection("talks");
         直近のすべての登壇
       </a>
     </section>
-    <section
-      id="blog"
-      class="col-start-3 col-end-4 grid grid-cols-4 flex-col gap-4"
-    >
-      <h2 class="col-span-full text-3xl font-bold">記事</h2>
+    <section class="col-start-3 col-end-4 flex flex-col gap-y-4" id="blog">
+      <h2 class="text-3xl font-bold">記事</h2>
+      <table class="border-t border-gray-300">
+        <thead>
+          <tr
+            class="border-b border-gray-300 text-left [&>th]:px-1.5 [&>th]:py-1"
+          >
+            <th class="w-20">日時</th>
+            <th>タイトル</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            qiitaArticles.length > 0 ? (
+              // Qiita APIから返ってくるのが記事の作成日時の降順なのでsortは不要
+              // https://qiita.com/api/v2/docs#get-apiv2usersuser_iditems
+              qiitaArticles.map((article) => (
+                <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
+                  <td class="proportional-nums">
+                    {new Date(article.data.created_at).toLocaleDateString(
+                      "ja-JP",
+                      {
+                        dateStyle: "medium",
+                      },
+                    )}
+                  </td>
+                  <td>
+                    <a
+                      href={article.data.url}
+                      target="_blank"
+                      class="text-cyan-600 underline hover:text-cyan-900"
+                    >
+                      {article.data.title}
+                    </a>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
+                <td colspan="2" class="px-1.5 py-1 text-center text-gray-500">
+                  記事の取得に失敗しました。
+                </td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>
       <a
-        href="https://qiita.com/kskwtnk/items/9fac826a2e1c8526aa50"
-        class="col-span-full grid gap-1 md:col-span-2"
+        href="https://qiita.com/kskwtnk"
         target="_blank"
+        class="self-start text-cyan-600 underline hover:text-cyan-900"
       >
-        <Image src={darkTheme} alt="" class="rounded-md" />
-        <h3 class="text-md">12 年続くサービスにダークテーマ UI を導入した</h3>
-      </a>
-      <a
-        href="https://qiita.com/kskwtnk/items/1c9e626f28a2798fdc21"
-        class="col-span-full grid gap-1 md:col-span-2"
-        target="_blank"
-      >
-        <Image src={kininaruDevops} alt="" class="rounded-md" />
-        <h3 class="text-md">デザインデータとコードを一体のものとして捉える</h3>
+        すべての記事
       </a>
     </section>
     <div class="col-start-2 col-end-5">
