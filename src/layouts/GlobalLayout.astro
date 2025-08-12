@@ -3,8 +3,8 @@ import "@fontsource/shippori-mincho/400.css";
 import "@fontsource/shippori-mincho/700.css";
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
-const { title = "綿貫佳祐", excerpt = "綿貫佳祐のポートフォリオ" } =
-  Astro.props;
+const { title, excerpt = "綿貫佳祐のポートフォリオ" } = Astro.props;
+const pageTitle = title ? `${title} | 綿貫佳祐` : "綿貫佳祐";
 ---
 
 <html lang="ja">
@@ -13,7 +13,7 @@ const { title = "綿貫佳祐", excerpt = "綿貫佳祐のポートフォリオ"
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={excerpt} />
     <ClientRouter />
   </head>
