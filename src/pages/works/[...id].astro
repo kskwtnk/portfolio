@@ -6,8 +6,8 @@ import type {
 } from "astro";
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
-import Footer from "../../components/Footer.astro";
-import GlobalLayout from "../../layouts/GlobalLayout.astro";
+import ExceptTopLayout from "../../layouts/ExceptTopLayout.astro";
+import "../../styles/markdown.css";
 
 export const getStaticPaths = (async () => {
   const workEntries = await getCollection("works");
@@ -59,135 +59,88 @@ function buildToc(headings: MarkdownHeading[]) {
 const toc = buildToc(headings);
 ---
 
-<GlobalLayout title={entry.data.title} excerpt={entry.data.excerpt}>
-  <div class="flex flex-col gap-16 px-3 pt-10 sm:px-5 md:px-7 md:pt-16">
+<ExceptTopLayout title={entry.data.title} excerpt={entry.data.excerpt}>
+  <div class="mx-auto grid max-w-5xl grid-cols-3 gap-x-6 gap-y-8 pb-12">
     <div
-      class="mx-auto grid grid-cols-1 gap-y-10 md:grid-cols-[minmax(0,_1fr)_repeat(3,_minmax(0,_320px))_minmax(0,_1fr)] md:gap-x-6"
+      class="col-span-full grid grid-cols-subgrid gap-y-5 md:row-start-1 md:row-end-2"
     >
-      <div
-        class="col-span-full md:col-start-2 md:col-end-5 md:row-start-1 md:row-end-2"
-      >
-        <h1
-          id="grainy-gradient-observation-target"
-          class="text-3xl font-bold sm:text-5xl md:text-7xl"
-        >
-          {entry.data.title}
-        </h1>
+      <h1 class="col-span-full text-4xl font-bold sm:text-5xl md:text-7xl">
+        {entry.data.title}
+      </h1>
+      <dl class="col-span-full grid grid-cols-subgrid items-start gap-y-3">
         <div
-          class="mt-6 flex flex-col items-start gap-y-4 md:mt-8 md:flex-row md:gap-x-10"
+          class="col-span-full border-l-2 border-zinc-300 pl-2 md:col-start-1 md:col-end-2"
         >
-          <div class="border-l-2 border-zinc-300 pl-3">
-            <p class="text-xs">期間</p>
-            <p class="text-md w-max md:text-lg">
-              {`${startDate} - ${endDate}`}
-            </p>
-          </div>
-          <div class="border-l-2 border-zinc-300 pl-3">
-            <p class="text-xs">キーワード</p>
-            <ul class="text-md w-max md:text-lg">
-              {entry.data.keywords.map((keyword) => <li>{keyword}</li>)}
-            </ul>
-          </div>
-          <p class="text-md border-l-2 border-zinc-300 pl-3 md:text-lg">
-            {entry.data.excerpt}
-          </p>
+          <dt class="text-xs">制作期間</dt>
+          <dd class="text-sm md:text-lg">
+            {`${startDate} – ${endDate}`}
+          </dd>
         </div>
-      </div>
-      <Image
-        src={entry.data.cover}
-        alt=""
-        class="col-span-full rounded-md md:row-start-2 md:row-end-3"
-        transition:name={`${entry.id}Image`}
-      />
-      <div
-        class="top-16 col-span-full border-l-2 border-zinc-300 pl-3 md:sticky md:col-start-2 md:col-end-3 md:row-start-3 md:row-end-4"
-      >
-        <span class="text-xs">目次</span>
-        <ul class="mt-1 flex flex-col gap-1 text-sm">
-          {
-            toc.map((heading) => (
-              <li>
-                <a href={`#${heading.slug}`}>{heading.text}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div
-        id="content"
-        class="text-md col-span-full md:col-start-3 md:col-end-5 md:row-start-3 md:row-end-6"
-      >
-        <Content />
-      </div>
-      <div
-        class="text-md col-span-full flex flex-col gap-y-1 md:col-start-3 md:col-end-5"
-      >
-        {
-          prev && (
-            <span>
-              前の記事:
-              <a
-                href={`/works/${prev.id}`}
-                class="text-cyan-600 underline hover:text-cyan-900"
-              >
-                {prev.data.title}
-              </a>
-            </span>
-          )
-        }
-        {
-          next && (
-            <span>
-              次の記事:
-              <a
-                href={`/works/${next.id}`}
-                class="text-cyan-600 underline hover:text-cyan-900"
-              >
-                {next.data.title}
-              </a>
-            </span>
-          )
-        }
-      </div>
+        <div
+          class="col-span-full border-l-2 border-zinc-300 pl-2 md:col-start-2 md:col-end-4"
+        >
+          <dt class="text-xs">概要</dt>
+          <dd class="text-sm md:text-lg">
+            {entry.data.excerpt}
+          </dd>
+        </div>
+      </dl>
     </div>
-    <Footer linkTo="/#works" />
+    <Image
+      src={entry.data.cover}
+      alt=""
+      class="col-span-full mx-[calc(50%-50cqi)] w-[100cqi] max-w-none md:mx-[calc(var(--spacing)*8*-1)] md:w-[calc(100%+var(--spacing)*8*2)]"
+      transition:name={`${entry.id}Image`}
+    />
+    <div
+      class="top-16 col-span-full border-l-2 border-zinc-300 pl-2 md:sticky md:col-start-1 md:col-end-2 md:row-start-3 md:row-end-4"
+    >
+      <span class="text-xs">目次</span>
+      <ul class="mt-1 flex flex-col gap-1 text-sm">
+        {
+          toc.map((heading) => (
+            <li>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div
+      id="content"
+      class="text-md col-span-full md:col-start-2 md:col-end-4 md:row-start-3 md:row-end-6"
+    >
+      <Content />
+    </div>
+    <div
+      class="text-md col-span-full flex flex-col gap-y-1 md:col-start-2 md:col-end-4"
+    >
+      {
+        prev && (
+          <span>
+            前の記事:
+            <a
+              href={`/works/${prev.id}`}
+              class="text-cyan-600 underline hover:text-cyan-900"
+            >
+              {prev.data.title}
+            </a>
+          </span>
+        )
+      }
+      {
+        next && (
+          <span>
+            次の記事:
+            <a
+              href={`/works/${next.id}`}
+              class="text-cyan-600 underline hover:text-cyan-900"
+            >
+              {next.data.title}
+            </a>
+          </span>
+        )
+      }
+    </div>
   </div>
-</GlobalLayout>
-
-<style is:global>
-  @reference "../../styles/global.css";
-
-  #content > * + * {
-    @apply mt-5;
-  }
-  #content h2 {
-    @apply text-3xl font-bold;
-  }
-  #content > * + h2 {
-    @apply mt-10;
-  }
-  #content > h3 {
-    @apply text-xl font-bold;
-  }
-  #content a {
-    @apply text-cyan-600 underline;
-  }
-  #content a:hover {
-    @apply text-cyan-900;
-  }
-  #content ul {
-    @apply list-disc pl-4;
-  }
-  #content ol {
-    @apply list-decimal pl-4;
-  }
-  #content :where(li, ol) ul {
-    @apply list-[circle] pl-4;
-  }
-  #content img {
-    @apply border border-zinc-200;
-  }
-  #content code {
-    @apply rounded-md bg-zinc-200 p-1 text-sm;
-  }
-</style>
+</ExceptTopLayout>
