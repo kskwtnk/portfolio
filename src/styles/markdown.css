@@ -4,13 +4,22 @@
   @apply mt-5;
 }
 #content h2 {
-  @apply mt-10 text-3xl font-bold;
+  @apply text-3xl font-bold;
+}
+#content > * + h2 {
+  @apply mt-10;
 }
 #content > h3 {
   @apply text-xl font-bold;
 }
+#content > * + h3 {
+  @apply mt-7;
+}
 #content a {
   @apply text-cyan-600 underline;
+}
+#content a:hover {
+  @apply text-cyan-900;
 }
 #content ul {
   @apply list-disc pl-4;
