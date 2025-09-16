@@ -1,269 +1,190 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import GlobalLayout from "../layouts/GlobalLayout.astro";
-import Footer from "../components/Footer.astro";
+import ScrollGuide from "../components/ScrollGuide.astro";
+import SnsLinks from "../components/SnsLinks.astro";
+import TopLayout from "../layouts/TopLayout.astro";
 
 const allWorks = await getCollection("works");
 const allTalks = await getCollection("talks");
 const qiitaArticles = await getCollection("qiita-articles");
 ---
 
-<GlobalLayout>
-  <div
-    class="grid grid-cols-[calc(var(--spacing)*2)_1fr_minmax(0,calc(var(--spacing)*60))_1fr_calc(var(--spacing)*2)] gap-y-4 sm:grid-cols-[calc(var(--spacing)*4)_1fr_minmax(0,calc(var(--spacing)*80))_1fr_calc(var(--spacing)*4)] sm:gap-y-10 md:grid-cols-[calc(var(--spacing)*8)_1fr_minmax(0,var(--container-5xl))_1fr_calc(var(--spacing)*8)] md:gap-y-16 lg:grid-cols-[calc(var(--spacing)*16)_1fr_minmax(0,var(--container-5xl))_1fr_calc(var(--spacing)*16)]"
-  >
-    <div
+<TopLayout>
+  <div class="grid grid-cols-1 gap-y-4 pb-12 md:pb-16">
+    <section
       id="above-the-fold"
-      class="col-start-2 col-end-5 flex h-screen flex-col gap-y-5 pt-2 pb-3 sm:gap-y-6 sm:pt-3 sm:pb-4 md:gap-y-10"
+      class="@container relative flex h-svh flex-col gap-y-5 pt-5"
     >
-      <header
-        class="flex flex-wrap items-center justify-between gap-x-3 text-xs font-bold"
+      <div
+        class="flex flex-col gap-y-[0.2em] text-[25cqi] md:text-[clamp(8.5rem,18.75cqi,15rem)]"
       >
-        <span>デザイン ポートフォリオ</span>
-        <hr class="grow border-zinc-300" />
-        <span>ユーザーインターフェース / マークアップ / グラフィック</span>
-      </header>
-      <div class="relative flex grow flex-col justify-between">
-        <section class="flex flex-col gap-y-3 sm:gap-y-4 md:gap-y-6">
-          <h1>
-            <ruby
-              class="grid gap-y-2 text-[calc((100vw-2*var(--spacing)*2)/4)] leading-none sm:text-[calc((100vw-2*var(--spacing)*4)/4)] md:gap-y-4 md:text-[calc((100vw-2*var(--spacing)*8)/6)]"
-              ><span class="font-bold">綿貫佳祐</span><rp>(</rp><rt
-                class="flex text-[calc(1em/3)] font-bold">Keisuke Watanuki</rt
-              ><rp>)</rp></ruby
-            >
-          </h1>
-          <div class="flex flex-col items-start gap-y-3 lg:gap-y-5">
-            <p
-              class="lg:text-md w-full text-sm sm:w-[calc((100vw-2*var(--spacing)*4)*0.75)] md:w-[calc((100vw-2*var(--spacing)*8)*0.5)]"
-            >
-              デジタルプロダクトのデザイナーです。理想に向き合い、言語化し、視覚化するプロセスを重視しています。意匠の良し悪しだけでなく、データの構造や使用時の心地よさなども考慮に入れてものづくりをします。
-            </p>
-            <div class="flex gap-x-2 lg:gap-x-3">
-              <a
-                href="/about-me"
-                class="lg:text-md rounded-md bg-zinc-700 px-2 py-1 text-sm font-bold text-zinc-50 transition-colors hover:bg-zinc-900 lg:px-5 lg:py-2"
-                >私について</a
-              >
-              <a
-                href="/about-portfolio"
-                class="lg:text-md rounded-md border border-zinc-700 bg-transparent px-2 py-1 text-sm font-bold transition-colors hover:border-zinc-900 hover:bg-zinc-100 lg:px-5 lg:py-2"
-                >このポートフォリオについて</a
-              >
-            </div>
-          </div>
-        </section>
-
-        <span
-          id="scroll-guide"
-          class="fixed bottom-5 flex items-center gap-2 text-xs"
+        <h1>
+          <ruby class="grid gap-y-[0.125em] leading-none font-bold">
+            <span>綿貫佳祐</span>
+            <rp>(</rp>
+            <rt class="flex text-[calc(1em/3)]">
+              <span class="tracking-[-0.02em]">K</span>eisuke &nbsp;
+              <span class="tracking-[-0.12em]">W</span>atanuki
+            </rt>
+            <rp>)</rp>
+          </ruby>
+        </h1>
+        <div
+          class="flex flex-col items-start gap-y-[1.5em] text-sm md:text-[clamp(var(--text-sm),3.125cqi,var(--text-lg))]/normal"
         >
-          <svg width="18" height="25" viewBox="0 0 18 25">
-            <defs>
-              <symbol id="arrow">
-                <path
-                  d="M1 0l-1 1c3 1 7 4 9 6c2 -2 6 -5 9 -6l-1 -1c-4 1 -8 4 -8 4c0 0 -4 -3 -8 -4Z"
-                >
-                  <animateMotion
-                    dur="4s"
-                    repeatCount="indefinite"
-                    path="M0 0 V18"></animateMotion>
-                </path>
-              </symbol>
-            </defs>
-            <use href="#arrow" y="-18"></use>
-            <use href="#arrow" y="-9"></use>
-            <use href="#arrow" y="0"></use>
-            <use href="#arrow" y="9"></use>
-            <use href="#arrow" y="18"></use>
-          </svg>
-          下へスクロール
-        </span>
-        <div class="absolute right-0 bottom-0 flex flex-col">
-          <a
-            href="https://twitter.com/kskwtnk"
-            class="rounded-md p-2 transition-colors hover:bg-slate-50"
-            title="X (Twitter)"
-          >
-            <img src="/logo-x.svg" alt="" class="w-4" />
-          </a>
-          <a
-            href="https://www.instagram.com/kskwtnk"
-            class="rounded-md p-2 transition-colors hover:bg-slate-50"
-            title="Instagram"
-          >
-            <img src="/logo-instagram.svg" alt="" class="w-4" />
-          </a>
-          <a
-            href="https://github.com/kskwtnk"
-            class="rounded-md p-2 transition-colors hover:bg-slate-50"
-            title="GitHub"
-          >
-            <img src="/logo-github.svg" alt="" class="w-4" />
-          </a>
+          <p class="w-full md:w-[clamp(34rem,75cqi,60rem)]">
+            デジタルプロダクトのデザイナーです。理想に向き合い、言語化・視覚化するプロセスを重視しています。意匠の良し悪しだけでなく、データ構造や使用時の心地よさなども考慮しながらものづくりをしています。
+          </p>
+          <div class="flex flex-wrap gap-[1em]">
+            <a
+              href="/about-me"
+              class="rounded-md bg-zinc-700 px-[1em] py-[0.5em] font-bold text-zinc-50 transition-colors hover:bg-zinc-900"
+              >私について</a
+            >
+            <a
+              href="/about-portfolio"
+              class="rounded-md border border-zinc-600 bg-zinc-50 px-[1em] py-[0.5em] font-bold transition-colors hover:border-zinc-900 hover:bg-white"
+              >このポートフォリオについて</a
+            >
+          </div>
         </div>
       </div>
-    </div>
-    <section
-      id="works"
-      class="col-start-3 col-end-4 grid grid-cols-4 flex-col gap-4"
-    >
-      <h2 class="col-span-full text-3xl font-bold">制作物</h2>
-      {
-        allWorks
-          .sort(
-            (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
-          )
-          .map((work) => (
-            <a
-              href={`${work.collection}/${work.id}`}
-              class="col-span-full grid gap-1 md:col-span-2"
-            >
-              <Image
-                src={work.data.cover}
-                alt=""
-                class="rounded-md"
-                transition:name={`${work.id}Image`}
-              />
-              <h3 class="text-md">{work.data.title}</h3>
-            </a>
-          ))
-      }
+      <div class="absolute bottom-5 left-0">
+        <ScrollGuide />
+      </div>
+      <div class="absolute right-0 bottom-5">
+        <SnsLinks />
+      </div>
     </section>
-    <section class="col-start-3 col-end-4 flex flex-col gap-y-4" id="talks">
-      <h2 class="text-3xl font-bold">登壇</h2>
-      <table class="border-t border-gray-300">
-        <thead>
-          <tr
-            class="border-b border-gray-300 text-left [&>th]:px-1.5 [&>th]:py-1"
-          >
-            <th class="w-20">日時</th>
-            <th>タイトル</th>
-          </tr>
-        </thead>
-        <tbody>
+
+    <div
+      class="flex max-w-5xl flex-col gap-y-8 justify-self-center md:gap-y-12"
+    >
+      <section id="works" class="flex flex-col gap-4">
+        <h2 class="col-span-full text-3xl font-bold">実績</h2>
+        <div class="grid grid-cols-4 gap-x-4 gap-y-5">
           {
-            allTalks
-              .flatMap((talk) => talk.data)
+            allWorks
               .sort(
                 (a, b) =>
-                  new Date(b.date).getTime() - new Date(a.date).getTime(),
+                  b.data.startDate.getTime() - a.data.startDate.getTime(),
               )
-              .slice(0, 5)
-              .map((talk) => (
-                <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
-                  <td class="proportional-nums">
-                    {new Date(talk.date).toLocaleDateString("ja-JP", {
-                      dateStyle: "medium",
-                    })}
-                  </td>
-                  <td>{talk.id}</td>
-                </tr>
+              .map((work) => (
+                <a
+                  href={`${work.collection}/${work.id}`}
+                  class="col-span-full grid gap-0.5 md:col-span-2"
+                >
+                  <Image
+                    src={work.data.cover}
+                    alt=""
+                    transition:name={`${work.id}Image`}
+                  />
+                  <h3 class="text-md">{work.data.title}</h3>
+                </a>
               ))
           }
-        </tbody>
-      </table>
-      <a
-        href="/talks"
-        class="self-start text-cyan-600 underline hover:text-cyan-900"
-      >
-        すべての登壇
-      </a>
-    </section>
-    <section class="col-start-3 col-end-4 flex flex-col gap-y-4" id="blog">
-      <h2 class="text-3xl font-bold">記事</h2>
-      <table class="border-t border-gray-300">
-        <thead>
-          <tr
-            class="border-b border-gray-300 text-left [&>th]:px-1.5 [&>th]:py-1"
+        </div>
+      </section>
+      <section class="flex flex-col gap-y-4" id="talks">
+        <div class="flex items-center justify-between">
+          <h2 class="text-3xl font-bold">登壇</h2>
+          <a
+            href="/talks"
+            class="rounded-md border border-zinc-600 bg-zinc-50 px-2 py-1 text-xs font-bold transition-colors hover:border-zinc-900 hover:bg-white"
           >
-            <th class="w-20">日時</th>
-            <th>タイトル</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            qiitaArticles.length > 0 ? (
-              // Qiita APIから返ってくるのが記事の作成日時の降順なのでsortは不要
-              // https://qiita.com/api/v2/docs#get-apiv2usersuser_iditems
-              qiitaArticles.map((article) => (
-                <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
-                  <td class="proportional-nums">
-                    {new Date(article.data.created_at).toLocaleDateString(
-                      "ja-JP",
-                      {
+            すべての登壇
+          </a>
+        </div>
+        <table class="border-t border-gray-300">
+          <thead>
+            <tr
+              class="border-b border-gray-300 text-left [&>th]:px-1.5 [&>th]:py-1"
+            >
+              <th class="w-20">日時</th>
+              <th>タイトル</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              allTalks
+                .flatMap((talk) => talk.data)
+                .sort(
+                  (a, b) =>
+                    new Date(b.date).getTime() - new Date(a.date).getTime(),
+                )
+                .slice(0, 5)
+                .map((talk) => (
+                  <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
+                    <td class="proportional-nums">
+                      {new Date(talk.date).toLocaleDateString("ja-JP", {
                         dateStyle: "medium",
-                      },
-                    )}
-                  </td>
-                  <td>
-                    <a
-                      href={article.data.url}
-                      target="_blank"
-                      class="text-cyan-600 underline hover:text-cyan-900"
-                    >
-                      {article.data.title}
-                    </a>
+                      })}
+                    </td>
+                    <td>{talk.id}</td>
+                  </tr>
+                ))
+            }
+          </tbody>
+        </table>
+      </section>
+      <section class="flex flex-col gap-y-4" id="qiita-articles">
+        <div class="flex items-center justify-between">
+          <h2 class="text-3xl font-bold">Qiita記事</h2>
+          <a
+            href="https://qiita.com/kskwtnk"
+            target="_blank"
+            class="rounded-md border border-zinc-600 bg-zinc-50 px-2 py-1 text-xs font-bold transition-colors hover:border-zinc-900 hover:bg-white"
+          >
+            すべての記事
+          </a>
+        </div>
+        <table class="border-t border-gray-300">
+          <thead>
+            <tr
+              class="border-b border-gray-300 text-left [&>th]:px-1.5 [&>th]:py-1"
+            >
+              <th class="w-20">日時</th>
+              <th>タイトル</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              qiitaArticles.length > 0 ? (
+                // Qiita APIから返ってくるのが記事の作成日時の降順なのでsortは不要
+                // https://qiita.com/api/v2/docs#get-apiv2usersuser_iditems
+                qiitaArticles.map((article) => (
+                  <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
+                    <td class="proportional-nums">
+                      {new Date(article.data.created_at).toLocaleDateString(
+                        "ja-JP",
+                        {
+                          dateStyle: "medium",
+                        },
+                      )}
+                    </td>
+                    <td>
+                      <a
+                        href={article.data.url}
+                        target="_blank"
+                        class="text-cyan-600 underline hover:text-cyan-900"
+                      >
+                        {article.data.title}
+                      </a>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
+                  <td colspan="2" class="px-1.5 py-1 text-center text-gray-500">
+                    記事の取得に失敗しました。
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
-                <td colspan="2" class="px-1.5 py-1 text-center text-gray-500">
-                  記事の取得に失敗しました。
-                </td>
-              </tr>
-            )
-          }
-        </tbody>
-      </table>
-      <a
-        href="https://qiita.com/kskwtnk"
-        target="_blank"
-        class="self-start text-cyan-600 underline hover:text-cyan-900"
-      >
-        すべての記事
-      </a>
-    </section>
-    <div class="col-start-2 col-end-5">
-      <Footer />
+              )
+            }
+          </tbody>
+        </table>
+      </section>
     </div>
   </div>
-</GlobalLayout>
-
-<script>
-  const scrollGuideObserverOptions = {
-    root: null,
-    rootMargin: "24px",
-    threshold: 1,
-  };
-
-  function scrollGuideObserverCallback(entries: IntersectionObserverEntry[]) {
-    const scrollGuide = document.getElementById("scroll-guide");
-    if (!scrollGuide) return;
-    entries.forEach((entry: { isIntersecting: boolean }) => {
-      if (entry.isIntersecting) {
-        scrollGuide.style.opacity = "1";
-      } else {
-        scrollGuide.style.opacity = "0";
-        scrollGuide.style.transition = "opacity 300ms ease-in-out";
-      }
-    });
-  }
-
-  const scrollGuideObserver = new IntersectionObserver(
-    scrollGuideObserverCallback,
-    scrollGuideObserverOptions,
-  );
-
-  function toggleScrollGuideVisibility() {
-    const observationTarget = document.getElementById("above-the-fold");
-    if (!observationTarget) return;
-    scrollGuideObserver.observe(observationTarget);
-  }
-
-  toggleScrollGuideVisibility();
-
-  document.addEventListener("astro:after-swap", toggleScrollGuideVisibility);
-</script>
+</TopLayout>
