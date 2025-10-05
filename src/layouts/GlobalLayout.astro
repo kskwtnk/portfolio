@@ -23,5 +23,18 @@ const pageTitle = title ? `${title} | 綿貫佳祐` : "綿貫佳祐";
   >
     <Grainy />
     <slot />
+    {
+      /* iOS 26.0 Safari タブバー表示調整ハック */
+      /* iOS 26.0ではSafariのタブバーがbody色を参照し意図しない透過が発生するため、 */
+      /* 画面上下に最小限の高さのダミーブロックを配置して色を制御 */
+    }
+    <div
+      class="pointer-events-none fixed top-0 h-[5px] w-full bg-black mix-blend-lighten"
+    >
+    </div>
+    <div
+      class="pointer-events-none fixed bottom-0 h-[5px] w-full bg-black mix-blend-lighten"
+    >
+    </div>
   </body>
 </html>
