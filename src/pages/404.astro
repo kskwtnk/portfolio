@@ -1,22 +1,16 @@
 ---
-import GlobalLayout from "../layouts/GlobalLayout.astro";
-import Footer from "../components/Footer.astro";
-import GrainyGradients from "../components/GrainyGradients.astro";
+import ExceptTopLayout from "../layouts/ExceptTopLayout.astro";
 ---
 
-<GlobalLayout>
-  <div class="flex h-screen flex-col gap-16 px-3 pt-12 sm:px-5 md:px-7">
-    <GrainyGradients />
-    <div
-      class="flex grow flex-col items-center justify-center gap-6 text-center"
-    >
-      <h1 class="flex flex-col gap-1 font-bold">
-        <span class="text-8xl">404</span>
-        <span class="text-xl">ページが見つかりません</span>
-      </h1>
-      <p>ページが移動または削除されたか、URLの入力間違いの可能性があります。</p>
-      <a href="/" class="text-cyan-600 underline">トップページへ戻る</a>
-    </div>
-    <Footer />
+<ExceptTopLayout>
+  <div
+    class="flex grow flex-col items-center justify-center gap-6 pb-20 text-center"
+  >
+    <h1 class="flex flex-col gap-1 font-bold">
+      <span class="text-8xl">404</span>
+      <span class="text-xl">ページが見つかりません</span>
+    </h1>
+    <p>ページが移動または削除されたか、URLの入力間違いの可能性があります。</p>
+    <a href="/" class="text-cyan-600 underline">トップページへ戻る</a>
   </div>
-</GlobalLayout>
+</ExceptTopLayout>

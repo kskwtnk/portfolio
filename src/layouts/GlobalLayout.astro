@@ -2,6 +2,7 @@
 import "@fontsource/shippori-mincho/400.css";
 import "@fontsource/shippori-mincho/700.css";
 import { ClientRouter } from "astro:transitions";
+import Grainy from "../components/Grainy.astro";
 import "../styles/global.css";
 const { title, excerpt = "綿貫佳祐のポートフォリオ" } = Astro.props;
 const pageTitle = title ? `${title} | 綿貫佳祐` : "綿貫佳祐";
@@ -17,7 +18,23 @@ const pageTitle = title ? `${title} | 綿貫佳祐` : "綿貫佳祐";
     <meta name="description" content={excerpt} />
     <ClientRouter />
   </head>
-  <body class="bg-zinc-100 font-serif text-zinc-950">
+  <body
+    class="flex min-h-screen flex-col bg-zinc-100 font-serif text-zinc-950 antialiased"
+  >
+    <Grainy />
     <slot />
+    {
+      /* iOS 26.0 Safari タブバー表示調整ハック */
+      /* iOS 26.0ではSafariのタブバーがbody色を参照し意図しない透過が発生するため、 */
+      /* 画面上下に最小限の高さのダミーブロックを配置して色を制御 */
+    }
+    <div
+      class="pointer-events-none fixed top-0 h-[5px] w-full bg-black mix-blend-lighten"
+    >
+    </div>
+    <div
+      class="pointer-events-none fixed bottom-0 h-[5px] w-full bg-black mix-blend-lighten"
+    >
+    </div>
   </body>
 </html>

@@ -1,0 +1,15 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import GlobalLayout from "../layouts/GlobalLayout.astro";
+---
+
+<GlobalLayout {...Astro.props}>
+  <Header />
+  <div
+    class="flex grow flex-col px-[clamp(calc(var(--spacing)*3),-1rem+10cqi,5rem)]"
+  >
+    <slot />
+  </div>
+  <Footer />
+</GlobalLayout>

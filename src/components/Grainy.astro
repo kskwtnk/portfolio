@@ -1,0 +1,33 @@
+<canvas id="grainy-canvas" class="fixed inset-0 -z-10"></canvas>
+
+<script>
+  import { createGrainy } from "../effects/grainy";
+
+  let cleanup: (() => void) | null = null;
+
+  // Draw canvas
+  function drawGrainy() {
+    // Clean up previous instance if it exists
+    if (cleanup) {
+      cleanup();
+      cleanup = null;
+    }
+
+    const canvasElement = document.getElementById("grainy-canvas");
+    if (canvasElement instanceof HTMLCanvasElement) {
+      cleanup = createGrainy(canvasElement);
+    }
+  }
+
+  drawGrainy();
+
+  document.addEventListener("astro:after-swap", drawGrainy);
+
+  // Clean up on page unload
+  document.addEventListener("astro:before-swap", () => {
+    if (cleanup) {
+      cleanup();
+      cleanup = null;
+    }
+  });
+</script>

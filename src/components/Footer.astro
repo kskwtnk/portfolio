@@ -1,15 +1,12 @@
----
-const { linkTo = "/" } = Astro.props;
----
-
-<footer
-  class="flex flex-wrap justify-between border-t border-zinc-300 py-5 text-xs"
->
-  <a href={linkTo}>トップページ</a>
-  <div class="flex gap-2">
-    <a href="https://twitter.com/kskwtnk">X (Twitter)</a>
-    <a href="https://www.instagram.com/kskwtnk">Instagram</a>
-    <a href="https://github.com/kskwtnk">GitHub</a>
-  </div>
-  <small class="text-[100%]">©️ 2023 綿貫 佳祐</small>
-</footer>
+<div class="@container">
+  <footer
+    class="flex flex-wrap justify-between bg-zinc-800 px-[clamp(calc(var(--spacing)*3),-1rem+10cqi,5rem)] py-[clamp(calc(var(--spacing)*3),-1rem+10cqi,2rem)] text-xs text-zinc-100 @xl:text-sm"
+  >
+    <small class="text-[100%]">©️ 2023 綿貫佳祐</small>
+    <div class="flex gap-2">
+      <a href="https://twitter.com/kskwtnk">X (Twitter)</a>
+      <a href="https://www.instagram.com/kskwtnk">Instagram</a>
+      <a href="https://github.com/kskwtnk">GitHub</a>
+    </div>
+  </footer>
+</div>

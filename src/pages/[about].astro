@@ -1,9 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
-import Footer from "../components/Footer.astro";
-import GlobalLayout from "../layouts/GlobalLayout.astro";
-import "../styles/about.css";
+import ExceptTopLayout from "../layouts/ExceptTopLayout.astro";
+import "../styles/markdown.css";
 
 export async function getStaticPaths() {
   const aboutEntries = await getCollection("about");
@@ -17,45 +16,35 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<GlobalLayout>
-  <div class="flex flex-col gap-16 px-3 pt-10 sm:px-5 md:px-7 md:pt-16">
-    <div
-      class="mx-auto grid w-[min(100%,_var(--container-6xl))] grid-cols-1 gap-x-6 gap-y-6 sm:gap-y-8 md:grid-cols-3 md:gap-y-10"
-    >
-      <h1
-        id="grainy-gradient-observation-target"
-        class="col-span-full text-3xl font-bold sm:text-5xl md:text-7xl"
+<ExceptTopLayout>
+  <div
+    class="mx-auto grid w-[min(100%,_var(--container-6xl))] grid-cols-1 gap-x-6 gap-y-6 pb-12 sm:gap-y-8 md:grid-cols-3 md:gap-y-10"
+  >
+    <h1 class="col-span-full text-4xl font-bold sm:text-5xl md:text-7xl">
+      {entry.data.title}
+    </h1>
+    <div class="top-16 flex flex-col gap-3 md:sticky">
+      {
+        entry.data.summaryImage && (
+          <Image src={entry.data.summaryImage} alt="" class="object-cover" />
+        )
+      }
+      {
+        entry.data.summaryHeading && (
+          <h2 class="font-bold">{entry.data.summaryHeading}</h2>
+        )
+      }
+      <ul
+        class="top-16 text-xs md:sticky md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3"
       >
-        {entry.data.title}
-      </h1>
-      <div class="top-16 flex flex-col gap-3 md:sticky">
-        {
-          entry.data.summaryImage && (
-            <Image
-              src={entry.data.summaryImage}
-              alt=""
-              class="rounded-md object-cover object-top"
-            />
-          )
-        }
-        {
-          entry.data.summaryHeading && (
-            <h2 class="font-bold">{entry.data.summaryHeading}</h2>
-          )
-        }
-        <ul
-          class="top-16 text-xs md:sticky md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3"
-        >
-          {entry.data.summaryKeywords.map((keyword) => <li>{keyword}</li>)}
-        </ul>
-      </div>
-      <div
-        id="content"
-        class="text-md md:col-start-2 md:col-end-4 md:row-start-2 md:row-end-5"
-      >
-        <Content />
-      </div>
+        {entry.data.summaryKeywords.map((keyword) => <li>{keyword}</li>)}
+      </ul>
     </div>
-    <Footer />
+    <div
+      id="content"
+      class="text-md md:col-start-2 md:col-end-4 md:row-start-2 md:row-end-5"
+    >
+      <Content />
+    </div>
   </div>
-</GlobalLayout>
+</ExceptTopLayout>
