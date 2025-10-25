@@ -4,11 +4,13 @@
   "version": "0.0.1",
   "scripts": {
     "build": "astro build",
+    "check": "biome check",
+    "check:fix": "biome check --write",
     "dev": "astro dev",
-    "format": "",
-    "format:fix": "",
-    "lint": "",
-    "lint:fix": "",
+    "format": "biome format",
+    "format:fix": "biome format --write",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write",
     "preview": "astro preview"
   },
   "dependencies": {
@@ -20,6 +22,7 @@
     "three": "^0.182.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.4",
     "@types/three": "^0.176.0"
   },
   "trustedDependencies": [
