@@ -26,7 +26,7 @@ const { Content } = await render(entry);
     <div class="top-16 flex flex-col gap-3 md:sticky">
       {
         entry.data.summaryImage && (
-          <Image src={entry.data.summaryImage} alt="" class="object-cover" />
+          <Image alt="" class="object-cover" src={entry.data.summaryImage} />
         )
       }
       {
@@ -37,7 +37,7 @@ const { Content } = await render(entry);
       <ul
         class="top-16 text-xs md:sticky md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3"
       >
-        {entry.data.summaryKeywords.map((keyword) => <li>{keyword}</li>)}
+        {entry.data.summaryKeywords.map((keyword: string) => <li>{keyword}</li>)}
       </ul>
     </div>
     <div
