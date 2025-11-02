@@ -31,11 +31,11 @@
   @apply list-[circle] pl-4;
 }
 #content table {
-  @apply w-full border-collapse;
+  @apply w-full border-collapse text-sm;
 }
 #content table th {
-  @apply border border-zinc-300 bg-zinc-200/50 p-2 text-left font-bold;
+  @apply border border-zinc-300 bg-zinc-100 px-2 py-1 text-left font-bold;
 }
 #content table td {
-  @apply border border-zinc-300 bg-zinc-100/50 p-2;
+  @apply border border-zinc-300 bg-white px-2 py-1;
 }
