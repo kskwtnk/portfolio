@@ -1,12 +1,12 @@
 <script>
   function stopSmilAnimations() {
-    let svgs = document.querySelectorAll("svg");
+    const svgs = document.querySelectorAll("svg");
     svgs.forEach((svg) => {
       svg.pauseAnimations();
     });
   }
 
-  let reducedMotion =
+  const reducedMotion =
     window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
 
   if (reducedMotion) {
