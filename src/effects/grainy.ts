@@ -18,11 +18,11 @@ export function createGrainy(canvas: HTMLCanvasElement) {
   // Add noise plane
   const planeGeometry = new THREE.PlaneGeometry(2, 2);
   const planeMaterial = new THREE.ShaderMaterial({
+    fragmentShader: grainyFragment,
     uniforms: {
       scrollOffset: { value: globalScrollOffset },
     },
     vertexShader: grainyVertex,
-    fragmentShader: grainyFragment,
   });
 
   const plane = new THREE.Mesh(planeGeometry, planeMaterial);
