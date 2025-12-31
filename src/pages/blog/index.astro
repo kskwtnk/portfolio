@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import ExceptTopLayout from "../../layouts/ExceptTopLayout.astro";
+
+const allBlogs = await getCollection("blog");
+---
+
+<ExceptTopLayout title="ブログ">
+  <article
+    class="mx-auto flex w-full max-w-[var(--container-3xl)] flex-col gap-y-6 self-center pb-12 sm:gap-y-8"
+  >
+    <h1 class="text-4xl font-bold sm:text-5xl md:text-7xl">ブログ</h1>
+    <div>
+      {
+        allBlogs
+          .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+          .map((blog) => (
+            <a
+              href={`/blog/${blog.id}`}
+              class="flex flex-col gap-2 border-gray-300 pb-6 not-first:border-t not-first:pt-4"
+            >
+              <time class="text-xs text-gray-500">
+                {blog.data.date.toLocaleDateString("ja-JP", {
+                  dateStyle: "medium",
+                })}
+              </time>
+              <h2 class="text-lg font-bold">{blog.data.title}</h2>
+              <p class="line-clamp-3 text-sm text-gray-600">
+                {blog.data.excerpt}
+              </p>
+            </a>
+          ))
+      }
+    </div>
+  </article>
+</ExceptTopLayout>

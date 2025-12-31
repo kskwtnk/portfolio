@@ -1,0 +1,144 @@
+---
+import type {
+  GetStaticPaths,
+  InferGetStaticPropsType,
+  MarkdownHeading,
+} from "astro";
+import { getCollection, render } from "astro:content";
+import ExceptTopLayout from "../../layouts/ExceptTopLayout.astro";
+import "../../styles/markdown.css";
+
+export const getStaticPaths = (async () => {
+  const blogEntries = await getCollection("blog");
+  return blogEntries
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .map((entry, i) => ({
+      params: { id: entry.id },
+      props: { entry, prev: blogEntries[i - 1], next: blogEntries[i + 1] },
+    }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry, prev, next } = Astro.props;
+const { Content, headings } = await render(entry);
+
+const jpDateFormatter = new Intl.DateTimeFormat("ja-JP", {
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+  timeZone: "Asia/Tokyo",
+});
+const publishedDate = jpDateFormatter.format(entry.data.date);
+const updatedDate = entry.data.updatedDate
+  ? jpDateFormatter.format(entry.data.updatedDate)
+  : "";
+
+interface TocItem {
+  depth: number;
+  slug: string;
+  text: string;
+  subheadings: TocItem[];
+}
+
+function buildToc(headings: MarkdownHeading[]): TocItem[] {
+  const toc: TocItem[] = [];
+  const parentHeadings = new Map<number, TocItem>();
+  for (const h of headings) {
+    const heading: TocItem = { ...h, subheadings: [] };
+    parentHeadings.set(heading.depth, heading);
+    if (heading.depth === 2) {
+      toc.push(heading);
+    } else {
+      const parent = parentHeadings.get(heading.depth - 1);
+      if (parent) {
+        parent.subheadings.push(heading);
+      }
+    }
+  }
+  return toc;
+}
+
+const toc = buildToc(headings);
+---
+
+<ExceptTopLayout title={entry.data.title} excerpt={entry.data.excerpt}>
+  <div class="mx-auto grid max-w-5xl grid-cols-3 gap-x-6 gap-y-8 pb-12">
+    <div
+      class="col-span-full grid grid-cols-subgrid gap-y-4 md:row-start-1 md:row-end-2"
+    >
+      <h1 class="col-span-full text-4xl font-bold sm:text-5xl md:text-7xl">
+        {entry.data.title}
+      </h1>
+      <p class="md:text-md col-span-full text-sm">{entry.data.excerpt}</p>
+    </div>
+    <div
+      class="col-span-full grid grid-cols-subgrid gap-y-5 md:col-start-1 md:col-end-2"
+    >
+      <dl class="col-span-full border-l-2 border-zinc-300 pl-2">
+        <dt class="text-xs">公開日</dt>
+        <dd class="text-sm">
+          {publishedDate}
+        </dd>
+        {
+          updatedDate && (
+            <>
+              <dt class="mt-2 text-xs">更新日</dt>
+              <dd class="text-sm">{updatedDate}</dd>
+            </>
+          )
+        }
+      </dl>
+      <div
+        class="top-16 col-span-full border-l-2 border-zinc-300 pl-2 md:sticky"
+      >
+        <span class="text-xs">目次</span>
+        <ul class="mt-1 flex flex-col gap-1 text-sm">
+          {
+            toc.map((heading) => (
+              <li>
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+    <div
+      id="content"
+      class="text-md col-span-full md:col-start-2 md:col-end-4 md:row-start-2 md:row-end-5"
+    >
+      <Content />
+    </div>
+    <div
+      class="text-md col-span-full flex flex-col gap-y-1 md:col-start-2 md:col-end-4"
+    >
+      {
+        prev && (
+          <span>
+            前の記事:
+            <a
+              href={`/blog/${prev.id}`}
+              class="text-cyan-600 underline hover:text-cyan-900"
+            >
+              {prev.data.title}
+            </a>
+          </span>
+        )
+      }
+      {
+        next && (
+          <span>
+            次の記事:
+            <a
+              href={`/blog/${next.id}`}
+              class="text-cyan-600 underline hover:text-cyan-900"
+            >
+              {next.data.title}
+            </a>
+          </span>
+        )
+      }
+    </div>
+  </div>
+</ExceptTopLayout>

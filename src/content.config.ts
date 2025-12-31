@@ -130,9 +130,20 @@ const qiitaArticlesCollection = defineCollection({
   }),
 });
 
+const blogCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/blog" }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    excerpt: z.string(),
+  }),
+});
+
 export const collections = {
   about: aboutCollection,
   works: worksCollection,
   talks: talksCollection,
   "qiita-articles": qiitaArticlesCollection,
+  blog: blogCollection,
 };

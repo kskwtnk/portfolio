@@ -16,6 +16,16 @@ const pageTitle = title ? `${title} | 綿貫佳祐` : "綿貫佳祐";
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={excerpt} />
+
+    <!-- OGP Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={excerpt} />
+    <meta property="og:site_name" content="綿貫佳祐" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={excerpt} />
+
     <ClientRouter />
   </head>
   <body
