@@ -8,6 +8,7 @@ import TopLayout from "../layouts/TopLayout.astro";
 const allWorks = await getCollection("works");
 const allTalks = await getCollection("talks");
 const qiitaArticles = await getCollection("qiita-articles");
+const allBlogs = await getCollection("blog");
 ---
 
 <TopLayout>
@@ -124,6 +125,59 @@ const qiitaArticles = await getCollection("qiita-articles");
                     <td>{talk.id}</td>
                   </tr>
                 ))
+            }
+          </tbody>
+        </table>
+      </section>
+      <section class="flex flex-col gap-y-4" id="blog">
+        <div class="flex items-center justify-between">
+          <h2 class="text-3xl font-bold">ブログ</h2>
+          <a
+            href="/blog"
+            class="rounded-md border border-zinc-600 bg-zinc-50 px-2 py-1 text-xs font-bold transition-colors hover:border-zinc-900 hover:bg-white"
+          >
+            すべての記事
+          </a>
+        </div>
+        <table class="border-t border-gray-300">
+          <thead>
+            <tr
+              class="border-b border-gray-300 text-left [&>th]:px-1.5 [&>th]:py-1"
+            >
+              <th class="w-20">日時</th>
+              <th>タイトル</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              allBlogs.length > 0 ? (
+                allBlogs
+                  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+                  .slice(0, 5)
+                  .map((blog) => (
+                    <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
+                      <td class="proportional-nums">
+                        {blog.data.date.toLocaleDateString("ja-JP", {
+                          dateStyle: "medium",
+                        })}
+                      </td>
+                      <td>
+                        <a
+                          href={`/blog/${blog.id}`}
+                          class="text-cyan-600 underline hover:text-cyan-900"
+                        >
+                          {blog.data.title}
+                        </a>
+                      </td>
+                    </tr>
+                  ))
+              ) : (
+                <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
+                  <td colspan="2" class="px-1.5 py-1 text-center text-gray-500">
+                    記事がありません。
+                  </td>
+                </tr>
+              )
             }
           </tbody>
         </table>
