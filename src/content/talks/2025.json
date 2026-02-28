@@ -1,35 +1,35 @@
 [
   {
+    "date": "2025-10-03",
     "id": "朝までマークアップ 3 JavaScript編",
-    "url": "https://cssnite.doorkeeper.jp/events/188175",
-    "date": "2025-10-03"
+    "url": "https://cssnite.doorkeeper.jp/events/188175"
   },
   {
-    "id": "名古屋学芸大学 講義",
-    "date": "2025-09-22"
+    "date": "2025-09-22",
+    "id": "名古屋学芸大学 講義"
   },
   {
+    "date": "2025-07-25",
     "id": "Friends of Figma Nagoya グリッドが搭載されたオートレイアウトを学ぼう！",
-    "url": "https://friends.figma.com/events/details/figma-nagoya-presents-guritsudogada-zai-saretaotoreiautowoxue-bou/",
-    "date": "2025-07-25"
+    "url": "https://friends.figma.com/events/details/figma-nagoya-presents-guritsudogada-zai-saretaotoreiautowoxue-bou/"
   },
   {
+    "date": "2025-06-23",
     "id": "Figma Config 2025はどうだった？現地参加者たちを招いたRecapイベント",
-    "url": "https://cybozu.connpass.com/event/358821/",
-    "date": "2025-06-23"
+    "url": "https://cybozu.connpass.com/event/358821/"
   },
   {
+    "date": "2025-04-11",
     "id": "Friends of Figma Osaka #07 w/ FoF Nagoya",
-    "url": "https://friends.figma.com/events/details/figma-osaka-presents-friends-of-figma-osaka-07-w-fof-nagoya/",
-    "date": "2025-04-11"
+    "url": "https://friends.figma.com/events/details/figma-osaka-presents-friends-of-figma-osaka-07-w-fof-nagoya/"
   },
   {
-    "id": "専門学校・大学合同Web制作合宿 講評",
-    "date": "2025-03-28"
+    "date": "2025-03-28",
+    "id": "専門学校・大学合同Web制作合宿 講評"
   },
   {
+    "date": "2025-01-31",
     "id": "朝までマークアップ 2（CSS編）",
-    "url": "https://cssnite.doorkeeper.jp/events/179874",
-    "date": "2025-01-31"
+    "url": "https://cssnite.doorkeeper.jp/events/179874"
   }
 ]

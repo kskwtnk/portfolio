@@ -4,11 +4,13 @@
   "version": "0.0.1",
   "scripts": {
     "build": "astro build",
+    "check": "biome check",
+    "check:fix": "biome check --write",
     "dev": "astro dev",
-    "format": "prettier src/",
-    "format:fix": "prettier --write src/",
-    "lint": "eslint src/",
-    "lint:fix": "eslint --fix src/",
+    "format": "biome format",
+    "format:fix": "biome format --write",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write",
     "preview": "astro preview"
   },
   "dependencies": {
@@ -20,18 +22,8 @@
     "three": "^0.182.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "@types/three": "^0.182.0",
-    "eslint": "^9.39.2",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-astro": "^1.5.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "globals": "^16.5.0",
-    "prettier": "^3.7.4",
-    "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "typescript-eslint": "^8.51.0",
-    "typescript-eslint-parser-for-extra-files": "^0.9.0"
+    "@biomejs/biome": "2.4.4",
+    "@types/three": "^0.176.0"
   },
   "trustedDependencies": [
     "sharp"

@@ -1,11 +1,11 @@
 ---
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
 import type {
   GetStaticPaths,
   InferGetStaticPropsType,
   MarkdownHeading,
 } from "astro";
-import { Image } from "astro:assets";
-import { getCollection, render } from "astro:content";
 import ExceptTopLayout from "../../layouts/ExceptTopLayout.astro";
 import "../../styles/markdown.css";
 
@@ -15,7 +15,7 @@ export const getStaticPaths = (async () => {
     .sort((a, b) => b.data.startDate.getTime() - a.data.startDate.getTime())
     .map((entry, i) => ({
       params: { id: entry.id },
-      props: { entry, prev: workEntries[i - 1], next: workEntries[i + 1] },
+      props: { entry, next: workEntries[i + 1], prev: workEntries[i - 1] },
     }));
 }) satisfies GetStaticPaths;
 
@@ -24,15 +24,15 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { entry, prev, next } = Astro.props;
 const { Content, headings } = await render(entry);
 const startDate = new Intl.DateTimeFormat("ja-JP", {
-  year: "numeric",
   month: "numeric",
   timeZone: "Asia/Tokyo",
+  year: "numeric",
 }).format(entry.data.startDate);
 const endDate = entry.data.endDate
   ? new Intl.DateTimeFormat("ja-JP", {
-      year: "numeric",
       month: "numeric",
       timeZone: "Asia/Tokyo",
+      year: "numeric",
     }).format(entry.data.endDate)
   : "";
 
@@ -120,8 +120,8 @@ const toc = buildToc(headings);
           <span>
             前の記事:
             <a
-              href={`/works/${prev.id}`}
               class="text-cyan-600 underline hover:text-cyan-900"
+              href={`/works/${prev.id}`}
             >
               {prev.data.title}
             </a>
@@ -133,8 +133,8 @@ const toc = buildToc(headings);
           <span>
             次の記事:
             <a
-              href={`/works/${next.id}`}
               class="text-cyan-600 underline hover:text-cyan-900"
+              href={`/works/${next.id}`}
             >
               {next.data.title}
             </a>

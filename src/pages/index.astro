@@ -73,13 +73,13 @@ const allBlogs = await getCollection("blog");
               )
               .map((work) => (
                 <a
-                  href={`${work.collection}/${work.id}`}
                   class="col-span-full grid gap-0.5 md:col-span-2"
+                  href={`${work.collection}/${work.id}`}
                 >
                   <Image
-                    src={work.data.cover}
                     alt=""
                     transition:name={`${work.id}Image`}
+                    src={work.data.cover}
                   />
                   <h3 class="text-md">{work.data.title}</h3>
                 </a>
@@ -219,9 +219,9 @@ const allBlogs = await getCollection("blog");
                     </td>
                     <td>
                       <a
+                        class="text-cyan-600 underline hover:text-cyan-900"
                         href={article.data.url}
                         target="_blank"
-                        class="text-cyan-600 underline hover:text-cyan-900"
                       >
                         {article.data.title}
                       </a>
@@ -230,7 +230,7 @@ const allBlogs = await getCollection("blog");
                 ))
               ) : (
                 <tr class="border-b border-gray-300 align-top [&>td]:px-1.5 [&>td]:py-1">
-                  <td colspan="2" class="px-1.5 py-1 text-center text-gray-500">
+                  <td class="px-1.5 py-1 text-center text-gray-500" colspan="2" >
                     記事の取得に失敗しました。
                   </td>
                 </tr>
