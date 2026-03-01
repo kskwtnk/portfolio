@@ -11,13 +11,12 @@ const allBlogs = await getCollection("blog");
   >
     <h1 class="text-4xl font-bold sm:text-5xl md:text-7xl">ブログ</h1>
     <div>
-      {
-        allBlogs
+      {allBlogs
           .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
           .map((blog) => (
             <a
-              href={`/blog/${blog.id}`}
               class="flex flex-col gap-2 border-gray-300 pb-6 not-first:border-t not-first:pt-4"
+              href={`/blog/${blog.id}`}
             >
               <time class="text-xs text-gray-500">
                 {blog.data.date.toLocaleDateString("ja-JP", {
@@ -29,8 +28,7 @@ const allBlogs = await getCollection("blog");
                 {blog.data.excerpt}
               </p>
             </a>
-          ))
-      }
+          ))}
     </div>
   </article>
 </ExceptTopLayout>

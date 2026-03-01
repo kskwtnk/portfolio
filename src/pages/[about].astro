@@ -24,16 +24,12 @@ const { Content } = await render(entry);
       {entry.data.title}
     </h1>
     <div class="top-16 flex flex-col gap-3 md:sticky">
-      {
-        entry.data.summaryImage && (
-          <Image alt="" class="object-cover" src={entry.data.summaryImage} />
-        )
-      }
-      {
-        entry.data.summaryHeading && (
+      {entry.data.summaryImage && (
+        <Image alt="" class="object-cover" src={entry.data.summaryImage} />
+        )}
+      {entry.data.summaryHeading && (
           <h2 class="font-bold">{entry.data.summaryHeading}</h2>
-        )
-      }
+        )}
       <ul
         class="top-16 text-xs md:sticky md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3"
       >

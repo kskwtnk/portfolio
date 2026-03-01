@@ -1,10 +1,10 @@
 ---
+import { getCollection, render } from "astro:content";
 import type {
   GetStaticPaths,
   InferGetStaticPropsType,
   MarkdownHeading,
 } from "astro";
-import { getCollection, render } from "astro:content";
 import ExceptTopLayout from "../../layouts/ExceptTopLayout.astro";
 import "../../styles/markdown.css";
 
@@ -14,7 +14,7 @@ export const getStaticPaths = (async () => {
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
     .map((entry, i) => ({
       params: { id: entry.id },
-      props: { entry, prev: blogEntries[i - 1], next: blogEntries[i + 1] },
+      props: { entry, next: blogEntries[i + 1], prev: blogEntries[i - 1] },
     }));
 }) satisfies GetStaticPaths;
 
@@ -24,10 +24,10 @@ const { entry, prev, next } = Astro.props;
 const { Content, headings } = await render(entry);
 
 const jpDateFormatter = new Intl.DateTimeFormat("ja-JP", {
-  year: "numeric",
-  month: "numeric",
   day: "numeric",
+  month: "numeric",
   timeZone: "Asia/Tokyo",
+  year: "numeric",
 });
 const publishedDate = jpDateFormatter.format(entry.data.date);
 const updatedDate = entry.data.updatedDate
@@ -77,28 +77,22 @@ const toc = buildToc(headings);
     >
       <dl class="border-l-2 border-zinc-300 pl-2">
         <dt class="text-xs">公開日</dt>
-        <dd class="text-sm">
-          {publishedDate}
-        </dd>
-        {
-          updatedDate && (
+        <dd class="text-sm">{publishedDate}</dd>
+        {updatedDate && (
             <>
               <dt class="mt-2 text-xs">更新日</dt>
               <dd class="text-sm">{updatedDate}</dd>
             </>
-          )
-        }
+          )}
       </dl>
       <div class="border-l-2 border-zinc-300 pl-2">
         <span class="text-xs">目次</span>
         <ul class="mt-1 flex flex-col gap-1 text-sm">
-          {
-            toc.map((heading) => (
+          {toc.map((heading) => (
               <li>
                 <a href={`#${heading.slug}`}>{heading.text}</a>
               </li>
-            ))
-          }
+            ))}
         </ul>
       </div>
     </div>
@@ -111,32 +105,28 @@ const toc = buildToc(headings);
     <div
       class="text-md col-span-full flex flex-col gap-y-1 md:col-start-2 md:col-end-4"
     >
-      {
-        prev && (
+      {prev && (
           <span>
             前の記事:
             <a
-              href={`/blog/${prev.id}`}
               class="text-cyan-600 underline hover:text-cyan-900"
+              href={`/blog/${prev.id}`}
             >
               {prev.data.title}
             </a>
           </span>
-        )
-      }
-      {
-        next && (
+        )}
+      {next && (
           <span>
             次の記事:
             <a
-              href={`/blog/${next.id}`}
               class="text-cyan-600 underline hover:text-cyan-900"
+              href={`/blog/${next.id}`}
             >
               {next.data.title}
             </a>
           </span>
-        )
-      }
+        )}
     </div>
   </div>
 </ExceptTopLayout>

@@ -72,17 +72,13 @@ const toc = buildToc(headings);
           class="col-span-full border-l-2 border-zinc-300 pl-2 md:col-start-1 md:col-end-2"
         >
           <dt class="text-xs">制作期間</dt>
-          <dd class="text-sm md:text-lg">
-            {`${startDate} – ${endDate}`}
-          </dd>
+          <dd class="text-sm md:text-lg">{`${startDate} – ${endDate}`}</dd>
         </div>
         <div
           class="col-span-full border-l-2 border-zinc-300 pl-2 md:col-start-2 md:col-end-4"
         >
           <dt class="text-xs">概要</dt>
-          <dd class="text-sm md:text-lg">
-            {entry.data.excerpt}
-          </dd>
+          <dd class="text-sm md:text-lg">{entry.data.excerpt}</dd>
         </div>
       </dl>
     </div>
@@ -97,13 +93,11 @@ const toc = buildToc(headings);
     >
       <span class="text-xs">目次</span>
       <ul class="mt-1 flex flex-col gap-1 text-sm">
-        {
-          toc.map((heading) => (
+        {toc.map((heading) => (
             <li>
               <a href={`#${heading.slug}`}>{heading.text}</a>
             </li>
-          ))
-        }
+          ))}
       </ul>
     </div>
     <div
@@ -115,8 +109,7 @@ const toc = buildToc(headings);
     <div
       class="text-md col-span-full flex flex-col gap-y-1 md:col-start-2 md:col-end-4"
     >
-      {
-        prev && (
+      {prev && (
           <span>
             前の記事:
             <a
@@ -126,10 +119,8 @@ const toc = buildToc(headings);
               {prev.data.title}
             </a>
           </span>
-        )
-      }
-      {
-        next && (
+        )}
+      {next && (
           <span>
             次の記事:
             <a
@@ -139,8 +130,7 @@ const toc = buildToc(headings);
               {next.data.title}
             </a>
           </span>
-        )
-      }
+        )}
     </div>
   </div>
 </ExceptTopLayout>
