@@ -10,8 +10,7 @@ const allTalks = await getCollection("talks");
     class="mx-auto flex w-full max-w-[var(--container-3xl)] flex-col gap-y-6 self-center pb-12 sm:gap-y-8"
   >
     <h1 class="text-4xl font-bold sm:text-5xl md:text-7xl">登壇</h1>
-    {
-      allTalks
+    {allTalks
         .sort((a, b) => new Date(b.id).getTime() - new Date(a.id).getTime())
         .map((talk) => (
           <section class="flex flex-col gap-y-2 sm:gap-y-3">
@@ -50,7 +49,6 @@ const allTalks = await getCollection("talks");
               </tbody>
             </table>
           </section>
-        ))
-    }
+        ))}
   </article>
 </ExceptTopLayout>

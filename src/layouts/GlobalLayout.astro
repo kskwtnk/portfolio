@@ -13,21 +13,21 @@ const pageTitle = title ? `${title} | 綿貫佳祐` : "綿貫佳祐";
 
 <html lang="ja">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
+    <meta charset="utf-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content={Astro.generator}>
     <title>{pageTitle}</title>
-    <meta name="description" content={excerpt} />
+    <meta name="description" content={excerpt}>
 
     <!-- OGP Meta Tags -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={excerpt} />
-    <meta property="og:site_name" content="綿貫佳祐" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={excerpt} />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content={pageTitle}>
+    <meta property="og:description" content={excerpt}>
+    <meta property="og:site_name" content="綿貫佳祐">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={pageTitle}>
+    <meta name="twitter:description" content={excerpt}>
 
     <ClientRouter />
   </head>
@@ -38,11 +38,9 @@ const pageTitle = title ? `${title} | 綿貫佳祐` : "綿貫佳祐";
     <slot />
     <div
       class="pointer-events-none fixed top-0 h-[5px] w-full bg-black mix-blend-lighten"
-    >
-    </div>
+    ></div>
     <div
       class="pointer-events-none fixed bottom-0 h-[5px] w-full bg-black mix-blend-lighten"
-    >
-    </div>
+    ></div>
   </body>
 </html>
